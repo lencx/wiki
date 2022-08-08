@@ -1,2 +1,1 @@
-# gh
-GitHub Trending
+# Wiki
