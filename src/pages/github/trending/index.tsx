@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 
 import { useTrending } from '@site/src/github/useTrending';
 import { GhProvider, useGhState } from '@site/src/github/ghStore';
-import GithubLangs from './GitHubLangs';
+import GithubLangs from './GithubLangs';
 
 const GitHubApp = () => {
   const store = useGhState();

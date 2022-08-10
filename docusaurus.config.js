@@ -69,7 +69,7 @@ const config = {
         items: [
           {to: '/github', label: 'Github', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/lencx/wiki',
             label: 'GitHub',
             position: 'right',
           },
