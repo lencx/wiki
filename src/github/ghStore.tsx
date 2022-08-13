@@ -16,9 +16,7 @@ type GhProviderProps = { children: React.ReactNode; value?: GhState };
 
 // Create a Context
 export const GhContext = createContext<GhState | undefined>(undefined);
-export const GhContextDispatch = createContext<GhDispatch | undefined>(
-  undefined
-);
+export const GhContextDispatch = createContext<GhDispatch | undefined>(undefined);
 
 const ghReducer = (state: GhState, action: GhAction) => {
   const _state = cloneDeep(state);
