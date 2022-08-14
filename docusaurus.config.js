@@ -28,7 +28,35 @@ const config = {
   },
 
   plugins: [
-    'docusaurus-plugin-sass'
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'web',
+        path: 'web',
+        routeBasePath: 'web',
+        editUrl: 'https://github.com/lencx/wiki/tree/main',
+        sidebarPath: require.resolve('./sidebarsWeb.js'),
+        editCurrentVersion: true,
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      ({
+        id: 'rust',
+        path: 'rust',
+        routeBasePath: 'rust',
+        editUrl: 'https://github.com/lencx/wiki/tree/main',
+        sidebarPath: require.resolve('./sidebarsRust.js'),
+        editCurrentVersion: true,
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }),
+    ],
   ],
 
   presets: [
@@ -38,26 +66,17 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/lencx/wiki/tree/main',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/lencx/wiki/tree/main',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
         },
       }),
     ],
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    // ]
   ],
 
   themeConfig:
@@ -75,32 +94,22 @@ const config = {
           style: { borderRadius: '50%' },
         },
         items: [
-          { to: '/blog', label: '🔮 Blog', position: 'left' },
+          { label: '🔮 Blog', to: '/blog', position: 'left' },
           {
             type: 'dropdown',
             label: '🌐 Web 开发',
             position: 'left',
+            activeBaseRegex: `/web/`,
             items: [
-              { label: 'JavaScript', href: '/js' },
-              { label: 'TypeScript', href: '/ts' },
-              { label: 'HTML', href: '/html' },
-              { label: 'CSS', href: '/css' },
+              { label: 'JavaScript', href: '/web/js' },
+              { label: 'TypeScript', href: '/web/ts' },
+              { label: 'HTML', href: '/web/html' },
+              { label: 'CSS', href: '/web/css' },
             ],
           },
-          {
-            type: 'dropdown',
-            label: '👨🏻‍💻 编程语言',
-            position: 'left',
-            items: [
-              { label: 'Rust', href: '/rs' },
-            ],
-          },
-          { to: '/github', label: 'GitHub', position: 'left' },
-          {
-            href: 'https://github.com/lencx/wiki',
-            label: '点 ⭐️ 不迷路',
-            position: 'right',
-          },
+          { label: '🦀 Rust', to: '/rust', activeBaseRegex: `/rust/`, position: 'left' },
+          { label: 'GitHub', to: '/github', position: 'left' },
+          { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
         ],
       },
       footer: {

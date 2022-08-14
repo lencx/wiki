@@ -1,0 +1,5 @@
+---
+title: Rust
+---
+
+Hello Rust
