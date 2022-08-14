@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useTheme, styled } from '@mui/material/styles';
 import { Button, Popper, InputBase, Box } from "@mui/material";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete'
 import FilterList from "@mui/icons-material/FilterList";
 import DoneIcon from "@mui/icons-material/Done";
@@ -123,11 +122,7 @@ const Languages: FC<LanguagesProps> = ({ defaultValue, onChange }) => {
 
   useEffect(() => {
     handleVal(defaultValue);
-  }, [])
-
-  const handleLang = (_: React.SyntheticEvent, val: GithubLang) => {
-    handleVal(val);
-  };
+  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(true)
@@ -137,6 +132,11 @@ const Languages: FC<LanguagesProps> = ({ defaultValue, onChange }) => {
   const handleClose = () => {
     setOpen(false);
     setAnchorEl(null);
+  };
+
+  const handleLang = (_: React.SyntheticEvent, val: GithubLang) => {
+    handleVal(val);
+    handleClose();
   };
 
   return (
@@ -152,66 +152,64 @@ const Languages: FC<LanguagesProps> = ({ defaultValue, onChange }) => {
         {lang?.lang || '😔'}
       </Button>
       <StyledPopper id={id} placement="bottom-start" open={open} anchorEl={anchorEl}>
-        <ClickAwayListener onClickAway={handleClose}>
-          <Autocomplete
-            open
-            id="github-languages"
-            value={lang}
-            disableCloseOnSelect
-            getOptionLabel={(option: GithubLang) => option.lang}
-            // @ts-ignore
-            options={githubColors.list}
-            PopperComponent={PopperComponent}
-            onChange={handleLang}
-            onClose={handleClose}
-            isOptionEqualToValue={(a, b) => a.lang === b.lang}
-            renderOption={(props, option, { selected }) => {
-              const isAll = option.lang === 'All Languages';
-              return (
-              <li {...props}>
-                <Box
-                  component="span"
-                  style={{
-                    width: 14,
-                    height: isAll ? 'auto' : 14,
-                    borderRadius: '50%',
-                    marginRight: 5,
-                    border: isAll ? 'none' : 'solid 1px rgba(0,0,0,0.1)',
-                    backgroundColor: isAll ? '' : option.color,
-                  }}
-                >
-                  {isAll ? '❖' : ''}
-                </Box>
-                <Box
-                  sx={{
-                    flexGrow: 1,
-                    "& span": {
-                      color: theme.palette.mode === "light" ? "#586069" : "#8b949e",
-                    },
-                  }}
-                >
-                  {option.lang}
-                </Box>
-                <Box
-                  component={DoneIcon}
-                  sx={{ width: 17, height: 17, mr: "5px", ml: "-2px" }}
-                  style={{
-                    visibility: selected ? "visible" : "hidden",
-                  }}
-                />
-              </li>
-              )
-            }}
-            renderInput={(params) => (
-              <StyledInput
-                ref={params.InputProps.ref}
-                inputProps={params.inputProps}
-                autoFocus
-                placeholder="Filter labels"
+        <Autocomplete
+          open
+          id="github-languages"
+          value={lang}
+          disableCloseOnSelect
+          getOptionLabel={(option: GithubLang) => option.lang}
+          // @ts-ignore
+          options={githubColors.list}
+          PopperComponent={PopperComponent}
+          onChange={handleLang}
+          onClose={handleClose}
+          isOptionEqualToValue={(a, b) => a.lang === b.lang}
+          renderOption={(props, option, { selected }) => {
+            const isAll = option.lang === 'All Languages';
+            return (
+            <li {...props}>
+              <Box
+                component="span"
+                style={{
+                  width: 14,
+                  height: isAll ? 'auto' : 14,
+                  borderRadius: '50%',
+                  marginRight: 5,
+                  border: isAll ? 'none' : 'solid 1px rgba(0,0,0,0.1)',
+                  backgroundColor: isAll ? '' : option.color,
+                }}
+              >
+                {isAll ? '❖' : ''}
+              </Box>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  "& span": {
+                    color: theme.palette.mode === "light" ? "#586069" : "#8b949e",
+                  },
+                }}
+              >
+                {option.lang}
+              </Box>
+              <Box
+                component={DoneIcon}
+                sx={{ width: 17, height: 17, mr: "5px", ml: "-2px" }}
+                style={{
+                  visibility: selected ? "visible" : "hidden",
+                }}
               />
-            )}
-          />
-        </ClickAwayListener>
+            </li>
+            )
+          }}
+          renderInput={(params) => (
+            <StyledInput
+              ref={params.InputProps.ref}
+              inputProps={params.inputProps}
+              autoFocus
+              placeholder="Filter labels"
+            />
+          )}
+        />
       </StyledPopper>
     </div>
   );
