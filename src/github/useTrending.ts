@@ -25,7 +25,7 @@ const getStart = (type: string = 'weekly') => {
 
 const transformQuery = (filters: transformFilters) => {
   const reposDate = `created:${getStart(filters.range)}..${dayjs().format('YYYY-MM-DD')}`;
-  const reposLang = filters.language !== 'all_languages' ? `language:"${filters.language}" ` : '';
+  const reposLang = filters.language !== 'All Languages' ? `language:${filters.language} ` : '';
   return encodeURIComponent(reposLang + reposDate);
 };
 

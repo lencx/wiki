@@ -37,7 +37,7 @@ const ViewType = () => {
       >
         {viewOptions[selectedIndex]}
       </Button>
-      <Popper transition placement="bottom-start" open={open} anchorEl={anchorRef.current}  disablePortal>
+      <Popper className="gh-btn-popper" transition placement="bottom-start" open={open} anchorEl={anchorRef.current}  disablePortal>
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
             <Paper>

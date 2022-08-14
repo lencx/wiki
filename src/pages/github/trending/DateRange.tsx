@@ -1,14 +1,26 @@
-import React from "react";
+import React, { FC, useEffect } from "react";
 import { Button, Popper, Paper, Grow, MenuList, MenuItem } from "@mui/material";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
-const rangeOptions = ['Yearly', 'Monthly', 'Weekly', 'Daily'];
+const rangeOptions = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
 
-const DateRange = () => {
+export type RangeType = 'Yearly' | 'Monthly' | 'Weekly' | 'Daily';
+interface DateRangeProps {
+  defaultValue: RangeType;
+  onChange?: (key: string, val: RangeType) => void;
+}
+
+const DateRange: FC<DateRangeProps> = ({ defaultValue, onChange }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(2);
+
+  useEffect(() => {
+    const idx = rangeOptions.findIndex((i) => i === defaultValue);
+    setSelectedIndex(idx);
+    onChange && onChange('range', rangeOptions[idx].toLocaleLowerCase() as RangeType);
+  }, [defaultValue])
 
   const handleClose = (event: Event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) return;
@@ -20,8 +32,9 @@ const DateRange = () => {
   };
 
   const handleMenuItemClick = (_: React.MouseEvent, index: number) => {
-    setSelectedIndex(index);
     setOpen(false);
+    setSelectedIndex(index);
+    onChange && onChange('range', rangeOptions[index].toLocaleLowerCase() as RangeType);
   };
 
   return (
@@ -37,7 +50,7 @@ const DateRange = () => {
       >
         {rangeOptions[selectedIndex]}
       </Button>
-      <Popper transition placement="bottom-start" open={open} anchorEl={anchorRef.current}  disablePortal>
+      <Popper className="gh-btn-popper" transition placement="bottom-start" open={open} anchorEl={anchorRef.current}  disablePortal>
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
             <Paper>

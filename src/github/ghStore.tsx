@@ -50,7 +50,7 @@ const GhProvider = ({ children }: GhProviderProps) => {
   );
 };
 
-const useGhState = () => {
+const useGhState = (): any => {
   const context = useContext(GhContext);
   if (context === undefined) {
     throw new Error('useGhState must be used within a GhProvider');

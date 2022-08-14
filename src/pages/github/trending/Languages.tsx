@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useTheme, styled } from '@mui/material/styles';
 import { Button, Popper, InputBase, Box } from "@mui/material";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -82,16 +82,51 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Languages = () => {
+interface LanguagesProps {
+  defaultValue: GithubLang;
+  onChange?: (key: string, val: GithubLang) => void;
+}
+
+export const LangIcon = ({ lang }) => {
+  return (
+    <Box style={{ marginRight: 20 }}>
+      <Box
+        component="span"
+        style={{
+          display: 'inline-block',
+          width: 12,
+          height: 12,
+          verticalAlign: -1,
+          borderRadius: '50%',
+          marginRight: 5,
+          border: 'solid 1px rgba(0,0,0,0.1)',
+          backgroundColor: githubColors.map[lang],
+        }}
+      />
+      {lang}
+    </Box>
+  )
+}
+
+const Languages: FC<LanguagesProps> = ({ defaultValue, onChange }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<null | GithubLang>({ lang: 'All Languages', color: '#fff' });
+  const [lang, setLang] = useState<null | GithubLang>(null);
   const theme = useTheme();
 
   const id = open ? 'github-langs' : undefined;
 
-  const handleLang = (_: React.SyntheticEvent, val: GithubLang) => {
+  const handleVal = (val: GithubLang) => {
     setLang(val);
+    onChange && onChange('language', val);
+  }
+
+  useEffect(() => {
+    handleVal(defaultValue);
+  }, [])
+
+  const handleLang = (_: React.SyntheticEvent, val: GithubLang) => {
+    handleVal(val);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -124,7 +159,8 @@ const Languages = () => {
             value={lang}
             disableCloseOnSelect
             getOptionLabel={(option: GithubLang) => option.lang}
-            options={githubColors}
+            // @ts-ignore
+            options={githubColors.list}
             PopperComponent={PopperComponent}
             onChange={handleLang}
             onClose={handleClose}
