@@ -5,10 +5,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { capitalizeFirstLetter } from '@site/src/utils/tool';
 import { useTrending } from '@site/src/github/useTrending';
 import { GhProvider, useGhState } from '@site/src/github/ghStore';
-
-import Languages from './Languages';
-import DateRange, { RangeType } from './DateRange';
-import ViewGrid from './ViewGrid';
+import Languages from '@site/src/components/GitHub/Languages';
+import DateRange, { RangeType } from '@site/src/components/GitHub/DateRange';
+import ViewGrid from '@site/src/components/GitHub/ViewGrid';
 import './index.scss';
 
 const GitHubApp = () => {
