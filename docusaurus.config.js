@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Wiki',
+  title: '浮之静',
   tagline: '{折腾 ⇌ 迷茫 ⇌ 思考]ing，在路上...',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
@@ -23,8 +23,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-Hans',
+    locales: ['zh-Hans', 'en'],
   },
 
   plugins: [
@@ -55,47 +55,84 @@ const config = {
         },
       }),
     ],
+    // [
+    //   '@docusaurus/plugin-content-docs',
+    // ]
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'viewport', content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
+        { name: 'keyword', content: 'web,js,css,ts,rust,wiki' },
+      ],
       navbar: {
-        title: 'Wiki',
+        title: '浮之静',
         logo: {
           alt: 'lencx',
           src: 'img/logo.png',
+          style: { borderRadius: '50%' },
         },
         items: [
-          {to: '/github', label: 'Github', position: 'left'},
+          { to: '/blog', label: '🔮 Blog', position: 'left' },
+          {
+            type: 'dropdown',
+            label: '🌐 Web 开发',
+            position: 'left',
+            items: [
+              { label: 'JavaScript', href: '/js' },
+              { label: 'TypeScript', href: '/ts' },
+              { label: 'HTML', href: '/html' },
+              { label: 'CSS', href: '/css' },
+            ],
+          },
+          {
+            type: 'dropdown',
+            label: '👨🏻‍💻 编程语言',
+            position: 'left',
+            items: [
+              { label: 'Rust', href: '/rs' },
+            ],
+          },
+          { to: '/github', label: 'GitHub', position: 'left' },
           {
             href: 'https://github.com/lencx/wiki',
-            label: 'GitHub',
+            label: '点 ⭐️ 不迷路',
             position: 'right',
           },
         ],
       },
       footer: {
         style: 'dark',
-        // links: [
-        //   {
-        //     title: 'Community',
-        //     items: [
-        //       {
-        //         label: 'Stack Overflow',
-        //         href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //       },
-        //       {
-        //         label: 'Discord',
-        //         href: 'https://discordapp.com/invite/docusaurus',
-        //       },
-        //       {
-        //         label: 'Twitter',
-        //         href: 'https://twitter.com/docusaurus',
-        //       },
-        //     ],
-        //   },
-        // ],
+        links: [
+          {
+            title: '我的社区',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/lencx',
+              },
+              {
+                label: '知乎',
+                href: 'https://www.zhihu.com/people/lencx_',
+              },
+              {
+                label: '公众号',
+                href: 'https://mp.weixin.qq.com/s/K9UtoDSL2mMh_hWm-xPPtg',
+              },
+            ],
+          },
+          {
+            title: '我的开源',
+            items: [
+              {
+                label: 'rwasm',
+                href: 'https://github.com/rwasm',
+              },
+            ],
+          },
+        ],
         copyright: `Copyright © ${new Date().getFullYear()} lencx`,
       },
       prism: {
