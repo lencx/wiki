@@ -32,7 +32,7 @@ const transformQuery = (filters: transformFilters) => {
 export const useTrending = () => {
   const dispatch = useGhDispatch();
 
-  const octokit = new Octokit({ auth: localStorage.getItem('WIKI_TOKEN') });
+  const octokit = new Octokit({ auth: localStorage.getItem('WIKI_GITHUB_TOKEN') });
 
   const queryGh = async (data: any = {}) => {
     dispatch({
@@ -48,6 +48,7 @@ export const useTrending = () => {
           order: 'desc',
         }
       );
+
       if (res) {
         dispatch({
           type: 'trending',
@@ -59,6 +60,19 @@ export const useTrending = () => {
         });
       }
     } catch (e) {
+      const msg = e.toString();
+      if (msg === 'HttpError: Bad credentials') {
+        dispatch({
+          type: 'trending',
+          payload: {
+            trendingList: [],
+            trendingStatus: 'invalid_token',
+            trendingLoading: false,
+          },
+        });
+        return;
+      }
+
       dispatch({
         type: 'trending',
         payload: {

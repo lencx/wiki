@@ -1,11 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
-import Layout from '@site/src/layout';
+import Link from '@docusaurus/Link';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+import Layout from '@site/src/layout';
 import { capitalizeFirstLetter } from '@site/src/utils/tool';
 import { useTrending } from '@site/src/github/useTrending';
 import { GhProvider, useGhState } from '@site/src/github/ghStore';
 import Languages from '@site/src/components/GitHub/Languages';
+import AddToken from '@site/src/components/GitHub/AddToken';
 import DateRange, { RangeType } from '@site/src/components/GitHub/DateRange';
 import ViewGrid from '@site/src/components/GitHub/ViewGrid';
 import './index.scss';
@@ -28,8 +30,15 @@ const GitHubApp = () => {
   }, [queryParams])
 
   const render = () => {
-    if (store?.trendingLoading) return <div className="repo-loading">loading...</div>;
-    if (store?.trendingList?.length > 0) return <ViewGrid data={store?.trendingList}/>;
+    if (store.trendingStatus === 'invalid_token') {
+      return <AddToken />
+    }
+    if (store?.trendingLoading) {
+      return <div className="repo-loading">loading...</div>;
+    }
+    if (store?.trendingList?.length > 0) {
+      return <ViewGrid data={store?.trendingList}/>;
+    }
     return <div className="repo-nodata">No Data</div>
   }
 

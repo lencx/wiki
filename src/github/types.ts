@@ -6,6 +6,6 @@ export type GithubLang = {
 
 export type TrendingData = {
   trendingList: any[],
-  trendingStatus: 'ok' | 'error',
+  trendingStatus: 'ok' | 'error' | 'invalid_token',
   trendingLoading: boolean,
 }

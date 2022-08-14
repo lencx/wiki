@@ -52,7 +52,7 @@ const StyledPopper = styled(Popper)(({ theme }) => ({
   }`,
   borderRadius: 6,
   width: 300,
-  zIndex: theme.zIndex.modal,
+  zIndex: 9,
   fontSize: 13,
   color: theme.palette.mode === 'light' ? '#24292e' : '#c9d1d9',
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#1c2128',

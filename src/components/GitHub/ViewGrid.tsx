@@ -7,9 +7,9 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { LangIcon } from './Languages';
 
-const StyledCard = styled(Card)(() => ({
+const StyledCard = styled(Card)({
   height: '100%'
-}));
+});
 
 const OwnerType = ({ type }) => ({
   User: <PersonIcon titleAccess="User" fontSize='small' />,
@@ -42,8 +42,8 @@ const RepoItem = ({ full_name, language, owner, html_url, description, stargazer
         </CardContent>
         <CardActions>
           {language && <LangIcon lang={language} />}
-          {stargazers_count > 0 && <span>⭐️ {stargazers_count}</span>}
-          {open_issues > 0 && <span>🐛 {open_issues}</span>}
+          {stargazers_count > 0 && <span style={{ marginRight: 5 }}>⭐️ {stargazers_count}</span>}
+          {open_issues > 0 && <span style={{ marginRight: 5 }}>🐛 {open_issues}</span>}
           {forks > 0 && <span>📚 {forks}</span>}
         </CardActions>
       </CardActionArea>
