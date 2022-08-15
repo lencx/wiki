@@ -33,6 +33,18 @@ export const useTrending = () => {
   const dispatch = useGhDispatch();
 
   const octokit = new Octokit({ auth: localStorage.getItem('WIKI_GITHUB_TOKEN') });
+  octokit.hook.error('request', async (error: any) => {
+    // error.status: 401 | 403
+    dispatch({
+      type: 'trending',
+      payload: {
+        trendingList: [],
+        trendingStatus: 'invalid_token',
+        trendingLoading: false,
+        trendingMsg: error.toString(),
+      },
+    });
+  });
 
   const queryGh = async (data: any = {}) => {
     dispatch({
@@ -59,29 +71,7 @@ export const useTrending = () => {
           },
         });
       }
-    } catch (e) {
-      const msg = e.toString();
-      if (msg === 'HttpError: Bad credentials') {
-        dispatch({
-          type: 'trending',
-          payload: {
-            trendingList: [],
-            trendingStatus: 'invalid_token',
-            trendingLoading: false,
-          },
-        });
-        return;
-      }
-
-      dispatch({
-        type: 'trending',
-        payload: {
-          trendingList: [],
-          trendingStatus: 'error',
-          trendingLoading: false,
-        },
-      });
-    }
+    } catch (e) {}
   };
   return [queryGh];
 };

@@ -1,15 +1,16 @@
-import React, { useEffect, useReducer } from 'react';
-import Link from '@docusaurus/Link';
+import React, { useEffect, useState, useReducer } from 'react';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 import Layout from '@site/src/layout';
-import { capitalizeFirstLetter } from '@site/src/utils/tool';
-import { useTrending } from '@site/src/github/useTrending';
-import { GhProvider, useGhState } from '@site/src/github/ghStore';
 import Languages from '@site/src/components/GitHub/Languages';
+import ViewGrid from '@site/src/components/GitHub/ViewGrid';
 import AddToken from '@site/src/components/GitHub/AddToken';
 import DateRange, { RangeType } from '@site/src/components/GitHub/DateRange';
-import ViewGrid from '@site/src/components/GitHub/ViewGrid';
+import { useTrending } from '@site/src/github/useTrending';
+import { GhProvider, useGhState } from '@site/src/github/ghStore';
+import { capitalizeFirstLetter } from '@site/src/utils/tool';
 import './index.scss';
 
 const GitHubApp = () => {
@@ -17,6 +18,7 @@ const GitHubApp = () => {
   const urlLang = url.searchParams.get('language');
   const urlRange = capitalizeFirstLetter(url.searchParams.get('range') || 'weekly') as RangeType;
 
+  const [msgOpen, setMsgOpen] = useState(false);
   const store = useGhState();
   const [queryParams, setQuery] = useReducer((o: Record<string, string>, n: Record<string, string>) => ({ ...o, ...n }), {});
   const [query] = useTrending();
@@ -28,6 +30,12 @@ const GitHubApp = () => {
     query(queryParams);
 
   }, [queryParams])
+
+  useEffect(() => {
+    if (store.trendingStatus === 'invalid_token') {
+      setMsgOpen(true);
+    }
+  }, [store.trendingStatus])
 
   const render = () => {
     if (store.trendingStatus === 'invalid_token') {
@@ -52,16 +60,27 @@ const GitHubApp = () => {
 
   return (
     <div>
-      <ButtonGroup style={{ padding: '20px 0 0 24px' }}>
-        <Languages
-          defaultValue={{ lang: urlLang || 'All Languages' }}
-          onChange={handleQuery}
-        />
-        <DateRange defaultValue={urlRange} onChange={handleQuery} />
-        {/* <ViewType defaultValue="Grid" onChange={handleQuery} /> */}
-      </ButtonGroup>
+      {store.trendingStatus !== 'invalid_token' && (
+        <ButtonGroup style={{ padding: '20px 0 0 24px' }}>
+          <Languages
+            defaultValue={{ lang: urlLang || 'All Languages' }}
+            onChange={handleQuery}
+          />
+          <DateRange defaultValue={urlRange} onChange={handleQuery} />
+          {/* <ViewType defaultValue="Grid" onChange={handleQuery} /> */}
+        </ButtonGroup>
+      )}
       {render()}
-      {/* <pre>{JSON.stringify(store, null, 2)}</pre> */}
+      <Snackbar
+        open={msgOpen}
+        autoHideDuration={3000}
+        onClose={() => setMsgOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          {store.trendingMsg}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }
