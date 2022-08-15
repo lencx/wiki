@@ -1,0 +1,77 @@
+---
+title: Rust 国内镜像
+---
+
+> macOS: `~/.cargo/config`
+
+## .cargo/config
+
+```toml
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+
+# 替换成你偏好的镜像源
+replace-with = 'sjtu'
+
+# 清华大学
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+# 中国科学技术大学
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+
+# 上海交通大学
+[source.sjtu]
+registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"
+
+# rustcc社区
+[source.rustcc]
+registry = "git://crates.rustcc.cn/crates.io-index"
+```
+
+## RsProxy - 字节跳动
+
+### crates.io 镜像
+
+`~/.cargo/config`
+
+```toml
+[source.crates-io]
+# To use sparse index, change 'rsproxy' to 'rsproxy-sparse'
+replace-with = 'rsproxy'
+
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+```
+
+### Rustup 镜像
+
+`~/.zshrc` or `~/.bashrc`
+
+```bash
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+```
+
+### 安装 Rust
+
+```bash
+# export the env above first
+curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh
+```
+
+---
+
+- [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn) - 清华大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由清华大学 TUNA 团队负责维护。
+- [中国科学技术大学开源软件镜像](https://mirrors.ustc.edu.cn) - 是 Debian, Ubuntu, Fedora, Archlinux, CentOS 等多个发行版的官方源。目前是中国大陆高校访问量最大，收录最全的开源软件镜像。
+- [上海交通大学 Linux 用户组 软件源镜像服务](https://mirrors.sjtug.sjtu.edu.cn)
+- [Rust语言中文社区](https://rustcc.cn)

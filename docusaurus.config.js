@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+// const lightCodeTheme = require('prism-react-renderer/themes/github');
+// const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -29,34 +29,7 @@ const config = {
 
   plugins: [
     'docusaurus-plugin-sass',
-    [
-      '@docusaurus/plugin-content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: 'web',
-        path: 'web',
-        routeBasePath: 'web',
-        editUrl: 'https://github.com/lencx/wiki/tree/main',
-        sidebarPath: require.resolve('./sidebarsWeb.js'),
-        editCurrentVersion: true,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      }),
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
-        id: 'rust',
-        path: 'rust',
-        routeBasePath: 'rust',
-        editUrl: 'https://github.com/lencx/wiki/tree/main',
-        sidebarPath: require.resolve('./sidebarsRust.js'),
-        editCurrentVersion: true,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      }),
-    ],
+    ...contentDocs('web/js', 'web/ts', 'web/html', 'web/css', 'rust'),
   ],
 
   presets: [
@@ -99,7 +72,6 @@ const config = {
             type: 'dropdown',
             label: '🌐 Web 开发',
             position: 'left',
-            activeBaseRegex: `/web/`,
             items: [
               { label: 'JavaScript', href: '/web/js' },
               { label: 'TypeScript', href: '/web/ts' },
@@ -107,7 +79,7 @@ const config = {
               { label: 'CSS', href: '/web/css' },
             ],
           },
-          { label: '🦀 Rust', to: '/rust', activeBaseRegex: `/rust/`, position: 'left' },
+          { label: '🦀 Rust', to: '/rust', position: 'left' },
           { label: 'GitHub', to: '/github', position: 'left' },
           { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
         ],
@@ -145,10 +117,39 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} lencx`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: require('prism-react-renderer/themes/github'),
+        darkTheme: require('prism-react-renderer/themes/oceanicNext'),
+        additionalLanguages: ['rust', 'powershell', 'bash', 'toml'],
       },
     }),
+
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('esbuild-loader'),
+      options: {
+        loader: 'tsx',
+        format: isServer ? 'cjs' : undefined,
+        target: isServer ? 'node12' : 'es2017',
+      },
+    }),
+  },
 };
 
 module.exports = config;
+
+function contentDocs(...args) {
+  return args.map((i) => [
+    '@docusaurus/plugin-content-docs',
+    /** @type {import('@docusaurus/plugin-content-docs').Options} */
+    ({
+      id: i.replace(/\//g, '-'),
+      path: i,
+      routeBasePath: i,
+      editUrl: 'https://github.com/lencx/wiki/tree/main',
+      sidebarPath: require.resolve('./sidebars.js'),
+      editCurrentVersion: true,
+      showLastUpdateAuthor: true,
+      showLastUpdateTime: true,
+    }),
+  ])
+}
