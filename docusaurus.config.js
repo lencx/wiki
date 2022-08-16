@@ -1,9 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-// const lightCodeTheme = require('prism-react-renderer/themes/github');
-// const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: '浮之静',
@@ -16,8 +13,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'lencx', // Usually your GitHub org/user name.
-  projectName: 'wiki', // Usually your repo name.
+  organizationName: 'lencx',
+  projectName: 'wiki',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -29,7 +26,59 @@ const config = {
 
   plugins: [
     'docusaurus-plugin-sass',
-    ...contentDocs('web/js', 'web/ts', 'web/html', 'web/css', 'rust'),
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: process.env.NODE_ENV === 'development',
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'saveData',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: '/meta/lencx.png',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-capable',
+            content: 'yes',
+          },
+          {
+            tagName: 'link',
+            rel: 'apple-touch-icon',
+            href: '/meta/lencx.png',
+          },
+          {
+            tagName: 'meta',
+            name: 'msapplication-TileImage',
+            content: '/meta/lencx.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: '/meta/manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: '#0F0F0F',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: '#0F0F0F',
+          },
+          {
+            tagName: 'meta',
+            name: 'msapplication-TileColor',
+            content: '#0F0F0F',
+          },
+        ],
+      },
+    ],
   ],
 
   presets: [
@@ -40,6 +89,17 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/lencx/wiki/tree/main',
+          routeBasePath: '/',
+          path: 'docs/',
+          exclude: ['docs/**', '**/_*.{md,mdx}'],
+          editCurrentVersion: false,
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args}) {
+            const sidebarItems = await defaultSidebarItemsGenerator(args);
+            // @ts-ignore
+            return sidebarItems;
+          },
         },
         blog: {
           showReadingTime: true,
@@ -72,6 +132,7 @@ const config = {
             type: 'dropdown',
             label: '🌐 Web 开发',
             position: 'left',
+            // activeBaseRegex: '',
             items: [
               { label: 'JavaScript', href: '/web/js' },
               { label: 'TypeScript', href: '/web/ts' },
@@ -79,7 +140,7 @@ const config = {
               { label: 'CSS', href: '/web/css' },
             ],
           },
-          { label: '🦀 Rust', to: '/rust', position: 'left' },
+          { type: 'doc', docId: '/rust', label: '🦀 Rust', to: '/rust', position: 'left' },
           { label: 'GitHub', to: '/github', position: 'left' },
           { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
         ],
@@ -136,20 +197,3 @@ const config = {
 };
 
 module.exports = config;
-
-function contentDocs(...args) {
-  return args.map((i) => [
-    '@docusaurus/plugin-content-docs',
-    /** @type {import('@docusaurus/plugin-content-docs').Options} */
-    ({
-      id: i.replace(/\//g, '-'),
-      path: i,
-      routeBasePath: i,
-      editUrl: 'https://github.com/lencx/wiki/tree/main',
-      sidebarPath: require.resolve('./sidebars.js'),
-      editCurrentVersion: true,
-      showLastUpdateAuthor: true,
-      showLastUpdateTime: true,
-    }),
-  ])
-}
