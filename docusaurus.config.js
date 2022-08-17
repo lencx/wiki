@@ -24,6 +24,110 @@ const config = {
     locales: ['zh-Hans', 'en'],
   },
 
+  presets: [
+    [
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/lencx/wiki/tree/main',
+          routeBasePath: '/',
+          path: 'docs/',
+          exclude: ['docs/**', '**/_*.{md,mdx}'],
+          editCurrentVersion: false,
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          // async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args}) {
+          //   const sidebarItems = await defaultSidebarItemsGenerator(args);
+          //   return sidebarItems;
+          // },
+        },
+        blog: {
+          showReadingTime: true,
+          editUrl: 'https://github.com/lencx/wiki/tree/main',
+        },
+        theme: {
+          customCss: require.resolve('./src/css/custom.scss'),
+        },
+      }),
+    ],
+  ],
+
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      metadata: [
+        { name: 'viewport', content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
+        { name: 'keyword', content: 'web,js,css,ts,rust,wiki' },
+      ],
+      navbar: {
+        title: '浮之静',
+        logo: {
+          alt: 'lencx',
+          src: 'img/logo.png',
+          style: { borderRadius: '50%' },
+        },
+        items: [
+          {
+            type: 'dropdown',
+            label: '👨🏻‍💻 编程',
+            position: 'left',
+            // activeBaseRegex: '',
+            items: [
+              { label: 'Rust', to: '/rust' },
+              { label: 'JavaScript', href: '/js' },
+              { label: 'TypeScript', href: '/ts' },
+              { label: 'CSS', href: '/css' },
+              { label: 'HTML', href: '/html' },
+            ],
+          },
+          { label: '🔮 Blog', to: '/blog', position: 'left' },
+          { label: '🗺 Cheatsheet', to: '/cheatsheet', position: 'left' },
+          { label: '😎 Awesome', to: '/awesome', position: 'left' },
+          { label: 'GitHub', to: '/github', position: 'left' },
+          { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
+        ],
+      },
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: '我的社区',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/lencx',
+              },
+              {
+                label: '知乎',
+                href: 'https://www.zhihu.com/people/lencx_',
+              },
+              {
+                label: '公众号',
+                href: 'https://mp.weixin.qq.com/s/K9UtoDSL2mMh_hWm-xPPtg',
+              },
+            ],
+          },
+          {
+            title: '我的开源',
+            items: [
+              {
+                label: 'rwasm',
+                href: 'https://github.com/rwasm',
+              },
+            ],
+          },
+        ],
+        copyright: `Copyright © ${new Date().getFullYear()} lencx`,
+      },
+      prism: {
+        theme: require('prism-react-renderer/themes/github'),
+        darkTheme: require('prism-react-renderer/themes/oceanicNext'),
+        additionalLanguages: ['rust', 'powershell', 'bash', 'toml'],
+      },
+    }),
+
   plugins: [
     'docusaurus-plugin-sass',
     [
@@ -80,109 +184,6 @@ const config = {
       },
     ],
   ],
-
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/lencx/wiki/tree/main',
-          routeBasePath: '/',
-          path: 'docs/',
-          exclude: ['docs/**', '**/_*.{md,mdx}'],
-          editCurrentVersion: false,
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-          async sidebarItemsGenerator({ defaultSidebarItemsGenerator, ...args}) {
-            const sidebarItems = await defaultSidebarItemsGenerator(args);
-            // @ts-ignore
-            return sidebarItems;
-          },
-        },
-        blog: {
-          showReadingTime: true,
-          editUrl: 'https://github.com/lencx/wiki/tree/main',
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.scss'),
-        },
-      }),
-    ],
-  ],
-
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      metadata: [
-        { name: 'viewport', content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
-        { name: 'keyword', content: 'web,js,css,ts,rust,wiki' },
-      ],
-      navbar: {
-        title: '浮之静',
-        logo: {
-          alt: 'lencx',
-          src: 'img/logo.png',
-          style: { borderRadius: '50%' },
-        },
-        items: [
-          { label: '🔮 Blog', to: '/blog', position: 'left' },
-          {
-            type: 'dropdown',
-            label: '🌐 Web 开发',
-            position: 'left',
-            // activeBaseRegex: '',
-            items: [
-              { label: 'JavaScript', href: '/web/js' },
-              { label: 'TypeScript', href: '/web/ts' },
-              { label: 'HTML', href: '/web/html' },
-              { label: 'CSS', href: '/web/css' },
-            ],
-          },
-          { type: 'doc', docId: '/rust', label: '🦀 Rust', to: '/rust', position: 'left' },
-          { label: 'GitHub', to: '/github', position: 'left' },
-          { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: '我的社区',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/lencx',
-              },
-              {
-                label: '知乎',
-                href: 'https://www.zhihu.com/people/lencx_',
-              },
-              {
-                label: '公众号',
-                href: 'https://mp.weixin.qq.com/s/K9UtoDSL2mMh_hWm-xPPtg',
-              },
-            ],
-          },
-          {
-            title: '我的开源',
-            items: [
-              {
-                label: 'rwasm',
-                href: 'https://github.com/rwasm',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} lencx`,
-      },
-      prism: {
-        theme: require('prism-react-renderer/themes/github'),
-        darkTheme: require('prism-react-renderer/themes/oceanicNext'),
-        additionalLanguages: ['rust', 'powershell', 'bash', 'toml'],
-      },
-    }),
 
   webpack: {
     jsLoader: (isServer) => ({
