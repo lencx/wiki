@@ -18,7 +18,7 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -27,4 +27,49 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-size: 14px;
+}
+
+.blog-post-page,
+.theme-doc-markdown.markdown {
+  header {
+    padding: 0 10px;
+    text-align: center;
+  }
+}
+
+.blog-post-page {
+  .avatar {
+    text-align: left;
+  }
+}
+
+h1 {
+  display: inline-block;
+  font-size: 26px !important;
+  text-align: center;
+  padding: 0 5px;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    hsla(10, 30%, 71%, 0.3) 0
+  );
+}
+h2 {
+  font-size: 24px !important;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 18px;
+}
+h6 {
+  font-size: 16px;
 }
