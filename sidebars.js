@@ -91,8 +91,8 @@ const sidebars = {
       link: {
         type: 'generated-index',
         title: 'Cheatsheet',
-        description: 'TODO',
         slug: '/cheatsheet',
+        description: '随着网络编程技术的飞速发展，我们需要学习的知识量也在不断增加。有时将无法记住编程语言或框架的所有语法、方法...。 为了解决上述问题，Cheat Sheet 应运而生。它将以系统和直观的方式综合所有语法、概念...，使你可以轻松找到在开发过程中应用的内容。',
         keywords: ['cheatsheet'],
       },
       items: ['cheatsheet/git'],
@@ -105,11 +105,11 @@ const sidebars = {
       link: {
         type: 'generated-index',
         title: 'Awesome',
-        description: 'TODO',
         slug: '/awesome',
+        description: 'TODO',
         keywords: ['awesome'],
       },
-      items: ['awesome/tools'],
+      items: ['awesome/docs'],
     },
   ],
 };
