@@ -63,18 +63,21 @@ const config = {
       ],
       navbar: {
         title: '浮之静',
+        // style: 'primary',
         logo: {
           alt: 'lencx',
           src: 'img/logo.png',
           style: { borderRadius: '50%' },
         },
         items: [
+          { label: '🔮 Blog', to: '/blog', position: 'left' },
           {
             type: 'dropdown',
             label: '👨🏻‍💻 编程',
             position: 'left',
             // activeBaseRegex: '',
             items: [
+              { label: '计算机基础', to: '/base' },
               { label: 'Rust', to: '/rust' },
               { label: 'JavaScript', href: '/js' },
               { label: 'TypeScript', href: '/ts' },
@@ -82,7 +85,16 @@ const config = {
               { label: 'HTML', href: '/html' },
             ],
           },
-          { label: '🔮 Blog', to: '/blog', position: 'left' },
+          { label: '🧮 Algorithms', to: '/algorithms', position: 'left' },
+          {
+            type: 'dropdown',
+            label: '📝 Initerview',
+            position: 'left',
+            items: [
+              { label: 'Web', href: '/interview/web' },
+              { label: 'Rust', to: '/interview/rust' },
+            ],
+          },
           { label: '🗺 Cheatsheet', to: '/cheatsheet', position: 'left' },
           { label: '😎 Awesome', to: '/awesome', position: 'left' },
           { label: 'GitHub', to: '/github', position: 'left' },
