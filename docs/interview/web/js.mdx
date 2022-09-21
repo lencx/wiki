@@ -1,0 +1,221 @@
+---
+title: JavaScript 基础
+---
+
+import BrowserWindow from '@site/src/components/BrowserWindow';
+
+## 数据类型
+
+- 基本数据类型（原始值）- 除对象类型（object）以外的其它任何类型定义的不可变的值（值本身无法被改变）
+  - **`Null`**
+  - **`Undefined`**
+  - **布尔 `Boolean`**
+  - **字符串 `String`**
+  - **符号 `Symbol`**
+  - **数字：`Number` 和 `BigInt`**
+- 引用数据类型（对象）- 在计算机科学中，对象（object）是指内存中的可以被标识符引用的一块区域
+  - **标准对象 `Object`** - 键值对
+  - **函数 `Function`** - 是一个附带可被调用功能的常规对象
+  - **有序集：数组和类型数组**
+    - 数组 `Array` - 是一种使用整数作为键（integer-keyed）属性并与长度（length）属性关联的常规对象
+    - 类型数组 `Typed Arrays` - 是 ECMAScript 2015 中新定义的 JavaScript 内建对象，提供了一个基本的二进制数据缓冲区的类数组视图（如 `Int8Array` `Uint8Array` `Int16Array` `Uint16Array` 等）
+  - 带键的集合 - 数据结构把对象的引用当作键
+    - Maps - 对象键是可枚举的
+    - Sets
+    - WeakMaps - 对象键是不可枚举的
+    - WeakSets
+  - 日期 `Date` - JavaScript 内置有 Date 对象
+  - 结构化数据 `JSON`
+  - 更多请查看 [JS 内置对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects)
+
+:::tip 参考链接
+
+- [JavaScript 数据类型和数据结构](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures)
+
+:::
+
+## 数据类型检测
+
+### typeof
+
+除了 `null` 之外的基本数据类型都可以显示正确的类型。对于对象来说，除函数外都会显示 object。
+
+```js
+// 基本数据类型
+typeof 2 // ✅ 'number'
+typeof 42n // ✅ 'bigint'
+typeof '2' // ✅ 'string'
+typeof (typeof 1) // ✅ 'string' typeof 总是返回一个字符串
+typeof true // ✅ 'boolean'
+typeof !!(1) // ✅ 'boolean' 两次调用 ! (逻辑非) 操作符相当于 Boolean()
+typeof undefined // ✅ 'undefined'
+typeof Symbol() // ✅ 'symbol'
+// 在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是 0。
+// 由于 null 代表的是空指针（大多数平台下值为 0x00），因此，null 的类型标签是 0，typeof null 也因此返回 "object"。
+typeof null // ❌ 'object'
+
+// 引用数据类型
+typeof function(){} // ✅ 'function'
+typeof {} // ✅ 'object'
+typeof [] // ❌ 'object'
+typeof (new String('String')) // 'object' 除 Function 外的所有构造函数的类型都是 'object'
+typeof /abc/ // ❌ 'object'
+```
+
+:::tip 参考链接
+
+- [typeof 操作符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof)
+
+:::
+
+### instanceof
+
+用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+
+```js
+// 构造函数
+function A(){}
+function B(){}
+
+const a = new A();
+
+a instanceof A; // true, 因为 Object.getPrototypeOf(a) === A.prototype
+a instanceof B; // true, 因为 B.prototype 不在 a 的原型链上
+a instanceof Object; // true, 因为 Object.prototype.isPrototypeOf(a) 返回 true
+
+A.prototype = {};
+const b = new A();
+b instanceof A; // true
+a instanceof A; // false, A.prototype 指向了一个空对象，这个空对象不在 a 的原型链上
+
+B.prototype = new A(); // 继承
+const c = new B();
+c instanceof B // true
+c instanceof A // true, 因为 A.prototype 在 c 的原型链上
+```
+
+:::tip 参考链接
+
+- [instanceof 运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)
+
+:::
+
+### Object.prototype.toString.call
+
+```js
+const check = (v) => Object.prototype.toString.call(v);
+
+check('abc');          // '[object String]'
+check([1, 2]);         // '[object Array]'
+check(true);           // '[object Boolean]'
+check(Symbol());       // '[object Symbol]'
+check(null);           // '[object Null]'
+check(undefined);      // '[object Undefined]'
+check(/abc/);          // '[object RegExp]'
+check(function(){});   // '[object Function]'
+check(Error('error')); // '[object Error]'
+check(Math);           // '[object Math]'
+check(new Date());     // '[object Date]'
+```
+
+:::tip 参考链接
+
+- [Object.prototype.toString()](hhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString)
+
+:::
+
+## 事件
+
+### 事件委托（Event Delegation）
+
+捕获和冒泡允许我们实现最强大的事件处理模式之一，即 `事件委托` 模式。如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个处理程序 —— 而是将单个处理程序放在它们的共同祖先上。主要分以下几步：
+1. 在容器（container）上放一个处理程序
+2. 在处理程序中 —— 检查源元素 `event.target`
+3. 如果事件发生在我们关注的元素内，就处理该事件
+
+```html
+<ul id="event-demo-1">
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+
+<style>
+li:hover { cursor: pointer; }
+li.highlight { color: red; }
+</style>
+
+<script>
+let selectedLi;
+document.querySelector('#event-demo-1').addEventListener('click', function(event) {
+  let target = event.target; // 点击目标
+  if (target.tagName != 'LI') return; // 如果不在 LI 上，则不做处理
+  highlight(target); // 高亮显示
+})
+function highlight(li) {
+  if (selectedLi) { // 如果有高亮显示，则移除
+    selectedLi.classList.remove('highlight');
+  }
+  selectedLi = li;
+  selectedLi.classList.add('highlight'); // 高亮显示新的 LI
+}
+</script>
+```
+
+<BrowserWindow
+  html={`
+    <ul id="event-demo-1">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+    <style>
+    li:hover { cursor: pointer; }
+    li.highlight { color: red; }
+    </style>
+  `}
+  script={`
+    let selectedLi;
+    document.querySelector('#event-demo-1').addEventListener('click', function(event) {
+      let target = event.target; // 点击目标
+      if (target.tagName != 'LI') return; // 如果不在 LI 上，则不做处理
+      highlight(target); // 高亮显示
+    })
+    function highlight(li) {
+      if (selectedLi) { // 如果有高亮显示，则移除
+        selectedLi.classList.remove('highlight');
+      }
+      selectedLi = li;
+      selectedLi.classList.add('highlight'); // 高亮显示新的 LI
+    }
+  `}
+/>
+
+:::caution 注意
+
+当我们将事件处理程序分配给 `document` 对象时，我们应该始终使用 `addEventListener`，而不是 `document.on<event>`，因为后者会引起冲突：新的处理程序会覆盖旧的处理程序。
+对于实际项目来说。在 `document` 上有许多由代码的不同部分设置的处理程序，这是很正常的。
+
+:::
+
+:::info 总结
+
+优势:
+- 简化初始化并节约内存：无需添加多个处理程序
+- 更少的代码：添加或移除元素时，无需添加/移除处理程序
+- DOM 修改：可以使用 innerHTML 等，来批量添加/移除元素
+
+劣势:
+- 事件必须冒泡。但有些事件不会冒泡。此外，低级别的处理程序不能使用 `event.stopPropagation()`
+- 委托可能会增加 CPU 负载，因为容器级别的处理程序会对容器中任意位置的事件做出反应，而不管我们是否对该事件感兴趣。但是，通常负载可以忽略不计，所以我们不考虑它
+
+:::
+
+:::tip 参考链接
+
+- [事件委托](https://zh.javascript.info/event-delegation)
+- [How JavaScript Event Delegation Works](https://davidwalsh.name/event-delegate)
+
+:::
+
+### 事件循环（Event Loop）
