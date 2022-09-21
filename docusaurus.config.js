@@ -92,7 +92,7 @@ const config = {
             position: 'left',
             items: [
               { label: 'Web', href: '/interview/web' },
-              { label: 'Rust', to: '/interview/rust' },
+              // { label: 'Rust', to: '/interview/rust' },
             ],
           },
           { label: '🗺 Cheatsheet', to: '/cheatsheet', position: 'left' },
