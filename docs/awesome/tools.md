@@ -24,3 +24,15 @@ title: Tools
 
 - [正则大全](https://any86.github.io/any-rule/) - 常用正则大全, 支持 web / vscode / idea / Alfred Workflow 多平台
 - [Regulex](https://jex.im/regulex/#!flags=&re=%5E(a%7Cb)*%3F%24) - JavaScript 正则表达式可视化工具
+
+### 编辑器
+
+## Editor
+
+- [Copilot](https://copilot.github.com/) - Your AI pair programmer. With GitHub Copilot, get suggestions for whole lines or entire functions right inside your editor.
+- [CodeSandbox: Online Code Editor and IDE for Rapid Web Development](https://codesandbox.io/) - CodeSandbox is an online code editor and prototyping tool that makes creating and sharing web apps faster
+- [CodePen](https://codepen.io/) - An online code editor, learning environment, and community for front-end web development using HTML, CSS and JavaScript code snippets, projects, and web applications.
+- [Utopia](https://utopia.app/) - Utopia is a production-grade online coding and design tool for React that reads and writes code you’ll want to commit.
+- [JS Bin - Collaborative JavaScript Debugging](https://jsbin.com/) - A live pastebin for HTML, CSS & JavaScript and a range of processors, including SCSS, CoffeeScript, Jade and more...
+- [JSFiddle - Code Playground](https://jsfiddle.net/) - Test your JavaScript, CSS, HTML or CoffeeScript online with JSFiddle code editor.
+- [StackBlitz](https://stackblitz.com/) - The online code editor for web apps. Powered by Visual Studio Code.
