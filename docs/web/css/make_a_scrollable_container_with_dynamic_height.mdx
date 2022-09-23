@@ -1,0 +1,108 @@
+---
+title: 如何实现动态高度的滚动容器？
+tags: [Interview]
+---
+
+import BrowserWindow from '@site/src/components/BrowserWindow';
+
+当滚动内容高度小于 200px 时，父容器高度等于滚动容器高度；当滚动容器高度大于 200px 时，滚动容器应该滚动，但是以下实现未滚动，应该如何解决？
+
+```css
+.parent {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.scroll {
+  overflow-y: auto;
+}
+```
+
+```html
+<div class="parent">
+  <div class="scroll">
+      <p> text 1 </p>
+      <p> text 2 </p>
+      <p> text 3 </p>
+      <p> text 4 </p>
+      <p> text 5 </p>
+      <p> text .. </p>
+      <p> text n </p>
+  <div>
+<div>
+```
+
+<BrowserWindow
+  html={`
+  <style>
+    .parent {
+      max-height: 200px;
+      overflow: hidden;
+    }
+    .scroll {
+      overflow-y: auto;
+    }
+  </style>
+  <div class="parent">
+    <div class="scroll">
+      <p> text 1 </p>
+      <p> text 2 </p>
+      <p> text 3 </p>
+      <p> text 4 </p>
+      <p> text 5 </p>
+      <p> text .. </p>
+      <p> text n </p>
+    <div>
+  <div>
+  `}
+/>
+
+<details>
+<summary>查看解决方案</summary>
+
+只需修改 parent 的 css 即可。在弹性布局模型中，弹性容器的子元素可以在任何方向上排布，也可以“弹性伸缩”其尺寸，既可以增加尺寸以填满未使用的空间，也可以收缩尺寸以避免父元素溢出。
+
+```css
+.parent {
+  max-height: 200px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+```
+
+<BrowserWindow
+  html={`
+  <style>
+    .parent2 {
+      max-height: 200px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .scroll {
+      overflow-y: auto;
+    }
+  </style>
+  <div class="parent2">
+    <div class="scroll">
+      <p> text 1 </p>
+      <p> text 2 </p>
+      <p> text 3 </p>
+      <p> text 4 </p>
+      <p> text 5 </p>
+      <p> text .. </p>
+      <p> text n </p>
+    <div>
+  <div>
+  `}
+/>
+
+</details>
+
+### 参考资源
+
+- [CSS Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout)
+- [Boxes That Fill Height (Or More) (and Don’t Squish)](https://css-tricks.com/boxes-fill-height-dont-squish/)
+- [flexbox misbehaving with max-height](https://stackoverflow.com/questions/22914399/flexbox-misbehaving-with-max-height)
+- [How to make a scrollable container with dynamic height using Flexbox](https://medium.com/@stephenbunch/how-to-make-a-scrollable-container-with-dynamic-height-using-flexbox-5914a26ae336)

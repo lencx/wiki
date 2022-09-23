@@ -1,5 +1,0 @@
----
-title: JavaScript
----
-
-Hello JavaScript

@@ -3,11 +3,16 @@
  * and scoped locally.
  */
 
+.layout {
+  flex: none;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-color: #2a2a2a;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +25,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #989898;
+}
+
+.fzj {
+  display: flex;
+}
+
+.fzj img {
+  max-width: 100%;
 }
