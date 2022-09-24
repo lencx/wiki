@@ -1,7 +1,7 @@
 ---
 title: 开发利器之命令行
 authors: lencx
-tags: [Terminal, Command]
+tags: [Terminal, Tools, Command]
 ---
 
 > 高效使用命令行是程序员必备的技能
