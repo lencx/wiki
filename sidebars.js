@@ -20,6 +20,20 @@ const sidebarsItems = (type, deep = 1) =>
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
+  notes: [
+    {
+      type: 'category',
+      label: 'Notes',
+      link: {
+        type: 'generated-index',
+        title: 'Notes',
+        slug: '/notes',
+        description: '站在巨人的肩膀上思考。',
+        keywords: ['notes'],
+      },
+      items: sidebarsItems('notes'),
+    },
+  ],
   /** web */
   js: [
     {

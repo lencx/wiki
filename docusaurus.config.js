@@ -71,6 +71,7 @@ const config = {
         },
         items: [
           { label: '🔮 Blog', to: '/blog', position: 'left' },
+          { label: '📝 笔记', to: '/notes', position: 'left' },
           {
             type: 'dropdown',
             label: '👨🏻‍💻 编程',
@@ -78,6 +79,7 @@ const config = {
             // activeBaseRegex: '',
             items: [
               { label: '计算机基础', to: '/base' },
+              { label: 'Algorithms', to: '/algorithms' },
               { label: 'Rust', to: '/rust' },
               { label: 'JavaScript', href: '/js' },
               { label: 'TypeScript', href: '/ts' },
@@ -85,7 +87,7 @@ const config = {
               { label: 'HTML', href: '/html' },
             ],
           },
-          { label: '🧮 Algorithms', to: '/algorithms', position: 'left' },
+          // { label: '🧮 Algorithms', to: '/algorithms', position: 'left' },
           {
             type: 'dropdown',
             label: '📝 Initerview',
