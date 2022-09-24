@@ -271,4 +271,4 @@ Longitude   Float    -179.983333    180            1           14          37.08
 [Volta](https://github.com/volta-cli/volta) - 快速无缝地安装和运行任何 JS 工具！ Volta 是用 Rust 构建的，以二进制文件形式发布，跨平台支持（macOS、Windows、Linux）。
 
 <!-- <img width="600" alt="volta" src="https://user-images.githubusercontent.com/16164244/159104526-4936dd10-39ea-4843-8d83-803628b39184.png"> -->
-![Volta](img/Volta.png)
+![volta](img/volta.png)
