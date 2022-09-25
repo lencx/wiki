@@ -100,12 +100,26 @@ const config = {
           { label: '🗺 Cheatsheet', to: '/cheatsheet', position: 'left' },
           { label: '😎 Awesome', to: '/awesome', position: 'left' },
           { label: 'GitHub', to: '/github', position: 'left' },
+          { label: '💖 赞助', to: '/sponsor', position: 'right' },
           { label: '点 ⭐️ 不迷路', href: 'https://github.com/lencx/wiki', position: 'right' },
         ],
       },
       footer: {
         style: 'dark',
         links: [
+          {
+            title: '浮之静',
+            items: [
+              {
+                label: '关于网站',
+                href: '/blog/about',
+              },
+              {
+                label: '赞助作者',
+                href: '/sponsor',
+              },
+            ],
+          },
           {
             title: '我的社区',
             items: [
