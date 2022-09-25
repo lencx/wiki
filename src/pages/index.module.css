@@ -15,12 +15,6 @@
   background-color: #2a2a2a;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
 .buttons {
   display: flex;
   align-items: center;
@@ -38,5 +32,17 @@
 }
 
 .fzj img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
+  box-shadow: 0 0 5px #2a2a2a;
+  border-radius: 10px;
+  user-select: none;
+}
+
+@media screen and (max-width: 960px) {
+  .fzj img {
+    margin: 5px;
+    width: calc(100% - 10px);
+  }
 }
