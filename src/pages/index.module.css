@@ -35,7 +35,7 @@
   width: 100%;
   max-width: 960px;
   margin: 20px auto;
-  box-shadow: 0 0 5px #2a2a2a;
+  box-shadow: 0 0 3px #2a2a2a;
   border-radius: 10px;
   user-select: none;
 }

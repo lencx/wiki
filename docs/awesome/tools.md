@@ -2,7 +2,13 @@
 title: Tools
 ---
 
-## PPT 演示
+## 通讯
+
+- [Discord](https://discord.com/) - ...where you can belong to a school club, a gaming group, or a worldwide art community. Where just you and a handful of friends can spend time together. A place that makes it easy to talk every day and hang out more often.
+- [Slack](https://slack.com/) - Slack is a new way to communicate with your team. It’s faster, better organised and more secure than email.
+<!-- - [Twitter](https://twitter.com/) - From breaking news and entertainment to sports and politics, get the full story with all the live commentary. -->
+
+## 幻灯片
 
 - [Slidev](https://sli.dev/) - Presentation slides for developers
 
@@ -26,8 +32,6 @@ title: Tools
 - [Regulex](https://jex.im/regulex/#!flags=&re=%5E(a%7Cb)*%3F%24) - JavaScript 正则表达式可视化工具
 
 ### 编辑器
-
-## Editor
 
 - [Copilot](https://copilot.github.com/) - Your AI pair programmer. With GitHub Copilot, get suggestions for whole lines or entire functions right inside your editor.
 - [CodeSandbox: Online Code Editor and IDE for Rapid Web Development](https://codesandbox.io/) - CodeSandbox is an online code editor and prototyping tool that makes creating and sharing web apps faster
