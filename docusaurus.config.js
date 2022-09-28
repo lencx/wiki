@@ -81,6 +81,7 @@ const config = {
               { label: '计算机基础', to: '/base' },
               { label: 'Algorithms', to: '/algorithms' },
               { label: 'Rust', to: '/rust' },
+              { label: 'Node.js', href: '/node' },
               { label: 'JavaScript', href: '/js' },
               { label: 'TypeScript', href: '/ts' },
               { label: 'CSS', href: '/css' },

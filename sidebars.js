@@ -34,6 +34,20 @@ const sidebars = {
       items: sidebarsItems('notes'),
     },
   ],
+  node: [
+    {
+      type: 'category',
+      label: 'Node.js',
+      link: {
+        type: 'generated-index',
+        title: 'Node.js',
+        description: 'JNode.js 是基于 Chrome 的 V8 JavaScript 引擎构建的 JavaScript 运行时。',
+        slug: '/node',
+        keywords: ['node'],
+      },
+      items: sidebarsItems('node/FAQ'),
+    },
+  ],
   /** web */
   js: [
     {
