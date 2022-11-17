@@ -191,15 +191,15 @@ const sidebars = {
   interview: [
     {
       type: 'category',
-      label: 'Web',
+      label: 'JavaScript',
       link: {
         type: 'generated-index',
-        title: 'Web',
-        slug: '/interview/web',
+        title: 'JS',
+        slug: '/interview/js',
         description: 'Web 技术相关的面试，包含但不限于 JavaScript、CSS、HTML 等。',
         keywords: ['interview', 'fe', 'web', 'js', 'css', 'html'],
       },
-      items: sidebarsItems('interview/web'),
+      items: sidebarsItems('interview/js'),
     },
   ],
 };

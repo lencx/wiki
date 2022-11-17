@@ -78,7 +78,7 @@ const config = {
             position: 'left',
             // activeBaseRegex: '',
             items: [
-              { label: '计算机基础', to: '/base' },
+              { label: 'CS Base', to: '/base' },
               { label: 'Algorithms', to: '/algorithms' },
               { label: 'Rust', to: '/rust' },
               { label: 'Node.js', href: '/node' },
@@ -94,7 +94,7 @@ const config = {
             label: '📝 Initerview',
             position: 'left',
             items: [
-              { label: 'Web', href: '/interview/web' },
+              { label: 'JavaScript', href: '/interview/js' },
               // { label: 'Rust', to: '/interview/rust' },
             ],
           },
