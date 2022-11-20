@@ -4,7 +4,7 @@
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
