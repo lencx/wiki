@@ -16,9 +16,9 @@
     "langs": "esno scripts/langs.ts"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.1.0",
-    "@docusaurus/plugin-pwa": "^2.1.0",
-    "@docusaurus/preset-classic": "^2.1.0",
+    "@docusaurus/core": "^2.2.0",
+    "@docusaurus/plugin-pwa": "^2.2.0",
+    "@docusaurus/preset-classic": "^2.2.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@giscus/react": "^2.2.0",
@@ -37,11 +37,11 @@
     "sass": "^1.54.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.1.0",
+    "@docusaurus/module-type-aliases": "^2.2.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "@types/lodash": "^4.14.182",
     "esno": "^0.16.3",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.3"
   },
   "browserslist": {
     "production": [
